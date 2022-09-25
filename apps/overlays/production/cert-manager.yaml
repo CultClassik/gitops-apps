@@ -6,4 +6,5 @@ metadata:
 spec:
   project: default
   source:
+    path: cluster/cert-manager/overlays/production
     targetRevision: HEAD
