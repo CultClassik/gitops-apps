@@ -12,4 +12,4 @@ spec:
           resourceGroupName: diehlabs-dns-nonprod
           hostedZoneName: aksnp.diehlabs.com
           managedIdentity:
-            clientID: 8961500f-56e8-4b33-a05b-4dbd9dca5c64
+            clientID: 69822f8c-f3b1-4bc4-bf82-00aa51bb6ca5

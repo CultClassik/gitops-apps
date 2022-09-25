@@ -20,7 +20,7 @@
 #       - dns01:
 #           azureDNS:
 #             managedIdentity:
-#               clientID: 8961500f-56e8-4b33-a05b-4dbd9dca5c64
+#               clientID: 69822f8c-f3b1-4bc4-bf82-00aa51bb6ca5
 #             subscriptionID: 502ac5b9-6b22-453d-94f9-5eee652d01ac
 #             resourceGroupName: diehlabs-dns-nonprod
 #             hostedZoneName: aksnp.diehlabs.com
