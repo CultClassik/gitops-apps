@@ -13,17 +13,17 @@ patchesStrategicMerge:
 - applications.yaml
 - certificate.yaml
 - gateway.yaml
-- issuer.yaml
+# - issuer.yaml
 - rollouts-extension.yaml
 - virtualservice.yaml
 
-# patchesJson6902:
-# - path: ../argocd-server-deploy-command.yaml
-#   target:
-#     group: apps
-#     kind: Deployment
-#     name: argocd-server
-#     version: v1
+patchesJson6902:
+- path: issuer-patch.yaml
+  target:
+    group: cert-manager.io
+    kind: Issuer
+    name: argo-issuer
+    version: v1
 
 # images:
 # - name: quay.io/argoproj/argocd
