@@ -1,6 +1,0 @@
-# # - {op: add,  path: /spec/acme/solvers/0/dns01/azureDNS/clientID, value: 69822f8c-f3b1-4bc4-bf82-00aa51bb6ca5 }
-# clientID only needed if more than 1 MSI is assigned to the kubelets
-# - {op: add,  path: /spec/acme/solvers/0/dns01/azureDNS/managedIdentity/clientID, value: 69822f8c-f3b1-4bc4-bf82-00aa51bb6ca5 }
-- {op: add,  path: /spec/acme/solvers/0/dns01/azureDNS/subscriptionID, value: 502ac5b9-6b22-453d-94f9-5eee652d01ac }
-- {op: add,  path: /spec/acme/solvers/0/dns01/azureDNS/resourceGroupName, value: diehlabs-dns-nonprod }
-- {op: add,  path: /spec/acme/solvers/0/dns01/azureDNS/hostedZoneName, value: aksnp.diehlabs.com }
