@@ -8,16 +8,16 @@ kind: Kustomization
 resources:
 - ../../base
 
-patchesStrategicMerge:
-- cluster-issuer.yaml
+# patchesStrategicMerge:
+# - cluster-issuer.yaml
 
-# patchesJson6902:
-# - path: azure-dns.yaml
-#   target:
-#     group: cert-manager.io
-#     kind: ClusterIssuer
-#     name: letsencrypt
-#     version: v1
+patchesJson6902:
+- path: azure-dns.yaml
+  target:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: letsencrypt
+    version: v1
 
 # secretGenerator:
 # - name: azuredns-config
