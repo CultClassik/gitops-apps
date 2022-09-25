@@ -22,8 +22,10 @@ spec:
     solvers:
       - dns01:
           azureDNS:
-            clientSecretSecretRef:
-              key: client-secret
-              name: azuredns-config
+            # clientSecretSecretRef:
+            #   key: client-secret
+            #   name: azuredns-config
+            tenantID: fc6ff48d-9858-46be-be10-c3a663f4bcbf
             environment: AzurePublicCloud
+
 

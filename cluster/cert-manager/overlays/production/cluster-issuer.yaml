@@ -18,4 +18,8 @@ spec:
     solvers:
       - dns01:
           azureDNS:
-            tenantID: fc6ff48d-9858-46be-be10-c3a663f4bcbf
+            managedIdentity:
+              clientID: 8961500f-56e8-4b33-a05b-4dbd9dca5c64
+            subscriptionID: 502ac5b9-6b22-453d-94f9-5eee652d01ac
+            resourceGroupName: diehlabs-dns-nonprod
+            hostedZoneName: aksnp.diehlabs.com
