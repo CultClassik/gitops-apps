@@ -43,4 +43,4 @@ spec:
       selfHeal: true
   source:
     path: cluster/kiali
-    repoURL: https://github.com/CultClassik/gitops-apps.git
+    repoURL: https://github.com/CultClassik/gitops-apps

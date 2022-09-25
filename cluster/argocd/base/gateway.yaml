@@ -15,4 +15,4 @@ spec:
       mode: SIMPLE
       credentialName: argocd-ingress-cert # This should match the Certificate secretName
     hosts:
-    - argo.aks.diehlabs.com # This should match a DNS name in the Certificate
+    - argo.aksnp.diehlabs.com # This should match a DNS name in the Certificate

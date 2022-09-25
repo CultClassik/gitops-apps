@@ -1,4 +1,4 @@
 - {op: add,  path: /spec/acme/solvers/0/dns01/azureDNS/clientID, value: 0de85b72-b574-4235-aea6-4ebe3aea155a }
 - {op: add,  path: /spec/acme/solvers/0/dns01/azureDNS/subscriptionID, value: 502ac5b9-6b22-453d-94f9-5eee652d01ac }
 - {op: add,  path: /spec/acme/solvers/0/dns01/azureDNS/resourceGroupName, value: rg-aks-cluster-001 }
-- {op: add,  path: /spec/acme/solvers/0/dns01/azureDNS/hostedZoneName, value: aks.diehlabs.com }
+- {op: add,  path: /spec/acme/solvers/0/dns01/azureDNS/hostedZoneName, value: aksnp.diehlabs.com }

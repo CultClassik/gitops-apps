@@ -18,4 +18,4 @@ spec:
       selfHeal: true
   source:
     path: cluster/argo-cd
-    repoURL: https://github.com/CultClassik/gitops-apps.git
+    repoURL: https://github.com/CultClassik/gitops-apps

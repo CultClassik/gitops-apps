@@ -5,6 +5,6 @@ metadata:
   namespace: argocd
 spec:
   secretName: argocd-ingress-cert
-  commonName: argo.aks.diehlabs.com
+  commonName: argo.aksnp.diehlabs.com
   dnsNames:
-  - argo.aks.diehlabs.com
+  - argo.aksnp.diehlabs.com

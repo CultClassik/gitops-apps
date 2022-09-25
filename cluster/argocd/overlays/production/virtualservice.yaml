@@ -5,4 +5,4 @@ metadata:
   namespace: argocd
 spec:
   hosts:
-  - argo.aks.diehlabs.com
+  - argo.aksnp.diehlabs.com

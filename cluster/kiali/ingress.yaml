@@ -5,9 +5,9 @@
 #   namespace: kiali-operator
 # spec:
 #   secretName: kiali-ingress-cert
-#   commonName: kiali.aks.diehlabs.com
+#   commonName: kiali.aksnp.diehlabs.com
 #   dnsNames:
-#   - kiali.aks.diehlabs.com
+#   - kiali.aksnp.diehlabs.com
 #   duration: 2160h0m0s # 90d
 #   renewBefore: 360h0m0s # 15d
 #   subject:
@@ -41,7 +41,7 @@
 #       mode: SIMPLE
 #       credentialName: kiali-operator/kiali-ingress-cert # This should match the Certificate secretName
 #     hosts:
-#     - kiali.aks.diehlabs.com # This should match a DNS name in the Certificate
+#     - kiali.aksnp.diehlabs.com # This should match a DNS name in the Certificate
 # ---
 # apiVersion: networking.istio.io/v1alpha3
 # kind: VirtualService
@@ -50,7 +50,7 @@
 #   namespace: istio-system
 # spec:
 #   hosts:
-#   - kiali.aks.diehlabs.com
+#   - kiali.aksnp.diehlabs.com
 #   gateways:
 #   - kiali-ingress-gateway
 #   http:

@@ -18,7 +18,7 @@ spec:
       selfHeal: true
   source:
     path: cluster/istio
-    repoURL: https://github.com/CultClassik/gitops-apps.git
+    repoURL: https://github.com/CultClassik/gitops-apps
  # this ensures argocd doesn't see the app as constantly out of sync
   ignoreDifferences:
     - group: admissionregistration.k8s.io

@@ -5,4 +5,5 @@ metadata:
   namespace: argocd
 spec:
   source:
+    path: cluster/external-dns/overlays/production
     targetRevision: HEAD

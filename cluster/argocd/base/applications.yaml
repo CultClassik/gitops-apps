@@ -15,5 +15,5 @@ spec:
       prune: true
       selfHeal: true
   source:
-    path: cluster/argocd
-    repoURL: https://github.com/CultClassik/gitops-apps.git
+    path: apps/overlays/production
+    repoURL: https://github.com/CultClassik/gitops-apps
