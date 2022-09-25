@@ -1,0 +1,17 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: cert-manager
+#   namespace: cert-manager
+# spec:
+#   template:
+#     metadata:
+#       containers:
+#       - args:
+#         # required to enable azure msi
+#         - --cluster-issuer-ambient-credentials
+#         - --issuer-ambient-credentials
+
+- {op: add,  path: /spec/template/spec/containers/0/args/-, value: --cluster-issuer-ambient-credentials }
+- {op: add,  path: /spec/template/spec/containers/0/args/-, value: --issuer-ambient-credentials }
+# {op: add,  path: /spec/template/spec/containers/0/command/-, value: /argocd }

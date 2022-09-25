@@ -12,7 +12,7 @@ resources:
 # - cluster-issuer.yaml
 
 patchesJson6902:
-- path: azure-dns.yaml
+- path: cluster-issuer-patch.yaml
   target:
     group: cert-manager.io
     kind: ClusterIssuer
