@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cert-manager
+  source:
+    path: cluster/cert-manager
+    repoURL: https://github.com/CultClassik/gitops-apps.git
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
+  # this ensures argocd doesn't see the app as constantly out of sync (key: control-plane)
+  ignoreDifferences:
+    - group: admissionregistration.k8s.io
+      kind: ValidatingWebhookConfiguration
+      jqPathExpressions:
+       - .webhooks[]?.namespaceSelector.matchExpressions

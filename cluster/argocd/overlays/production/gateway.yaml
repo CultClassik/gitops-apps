@@ -1,0 +1,10 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: argocd-ingress-gateway
+  namespace: argocd
+spec:
+  servers:
+  - port:
+    hosts:
+    - argo.aks.diehlabs.com # This should match a DNS name in the Certificate

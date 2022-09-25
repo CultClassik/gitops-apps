@@ -1,0 +1,8 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: argo-cd-https
+  namespace: argocd
+spec:
+  hosts:
+  - argo.aks.diehlabs.com

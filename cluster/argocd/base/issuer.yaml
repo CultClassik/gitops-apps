@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: argo-issuer
+  namespace: argocd
+spec:
+  acme:
+    server: "https://acme-v02.api.letsencrypt.org/directory"
+    email: aks-cert-mgr@diehlabs.com
+    privateKeySecretRef:
+      name: letsencrypt
+    solvers:
+    - dns01:
+        azureDNS:
+          environment: AzurePublicCloud

@@ -1,0 +1,12 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: azure-workload-identity
+  namespace: argocd
+spec:
+  project: default
+  source:
+    targetRevision: '0.13.0'
+    helm:
+      values: |
+        azureTenantID: fc6ff48d-9858-46be-be10-c3a663f4bcbf

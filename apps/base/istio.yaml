@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istio
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: istio-system
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
+  source:
+    path: cluster/istio
+    repoURL: https://github.com/CultClassik/gitops-apps.git
+ # this ensures argocd doesn't see the app as constantly out of sync
+  ignoreDifferences:
+    - group: admissionregistration.k8s.io
+      kind: ValidatingWebhookConfiguration
+      jqPathExpressions:
+       - .webhooks[]?.failurePolicy
+    - group: admissionregistration.k8s.io
+      kind: MutatingWebhookConfiguration
+      jqPathExpressions:
+       - .webhooks[]?.namespaceSelector.matchExpressions #.control-plane
