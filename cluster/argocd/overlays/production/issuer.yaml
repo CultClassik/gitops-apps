@@ -9,7 +9,7 @@ spec:
     - dns01:
         azureDNS:
           subscriptionID: 502ac5b9-6b22-453d-94f9-5eee652d01ac
-          resourceGroupName: rg-aks-cluster-001
+          resourceGroupName: diehlabs-dns-nonprod
           hostedZoneName: aksnp.diehlabs.com
           managedIdentity:
             clientID: a5271a34-edf7-4059-9e8c-bfa545daed9b
