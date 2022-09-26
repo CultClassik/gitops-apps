@@ -39,3 +39,6 @@ spec:
           enabled: true
           serviceType: LoadBalancer
           # activeVaultPodOnly: true
+          annotations:
+            # internal load balancer since we'll only access this via istio
+            service.beta.kubernetes.io/azure-load-balancer-internal: "true"
