@@ -4,7 +4,6 @@ metadata:
   name: vault
   namespace: argocd
 spec:
-  project: default
   source:
     path: cluster/vault
     targetRevision: HEAD

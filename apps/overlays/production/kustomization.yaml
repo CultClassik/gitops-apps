@@ -14,3 +14,4 @@ patchesStrategicMerge:
 - external-dns.yaml
 - istio.yaml
 - kiali.yaml
+- vault.yaml
