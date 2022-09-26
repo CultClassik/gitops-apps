@@ -1,19 +1,41 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: vault
-  namespace: argocd
+  name: hashicorp-vault
+  namespace: argo-cd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: vault
-  source:
-    repoURL: https://github.com/CultClassik/gitops-apps
+  project: default
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
     automated:
       prune: true
       selfHeal: true
+  # this ensures argocd doesn't see the app as constantly out of sync due to mutating webhook
+  ignoreDifferences:
+    - group: admissionregistration.k8s.io
+      kind: MutatingWebhookConfiguration
+      jqPathExpressions:
+       - .webhooks[]?.clientConfig.caBundle
+  source:
+    chart: vault
+    repoURL: https://helm.releases.hashicorp.com
+    targetRevision: 0.21.0
+    helm:
+      values: |
+        server:
+          affinity: ""
+          ha:
+            enabled: true
+            raft: 
+              enabled: true
+
+        ui:
+          enabled: true
+          serviceType: LoadBalancer
+          # activeVaultPodOnly: true
