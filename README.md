@@ -22,79 +22,58 @@ ArgoCD applications for a Kubernetes cluster - Managed by CultClassik/iac-github
     ```
 
 ## Bootstrapping:
-1. istio
-    * `kubectl apply -k cluster/istio`
-2. argocd
-    * 
-        ```bash
-        # this will error but that's ok, it will manage itself later
-        kubectl apply -k cluster/argocd/overlays/production
+```bash
+# install istio
+kubectl apply -k cluster/istio
 
-        # get the initial password for "admin" in argocd
-        kubectl get secret argocd-initial-admin-secret \
-            -n argocd \
-            -o jsonpath="{.data.password}" | base64 -d; echo
-        ```
+# this will error but that's ok, it will manage itself later
+kubectl apply -k cluster/argocd/overlays/production
+
+# get the initial password for "admin" in argocd
+kubectl get secret argocd-initial-admin-secret \
+    -n argocd \
+    -o jsonpath="{.data.password}" | base64 -d; echo
+```
+
+## Initialize Vault
+```bash
+kubectl get pods -n vault
+
+# initialize
+kubectl exec hashicorp-vault-0 -- vault operator init \
+    -key-shares=5 \
+    -key-threshold=3 \
+    -format=json > cluster-keys.json
+
+# get the keys
+VAULT_UNSEAL_KEY=$(jq -r ".keys_base64[0]" cluster-keys.json)
+
+# unseal #0
+kubectl exec -n vault hashicorp-vault-0 -- vault operator unseal $VAULT_UNSEAL_KEY
+
+# join the other nodes
+kubectl exec -n vault -ti hashicorp-vault-1 -- vault operator raft join http://hashicorp-vault-0.vault-internal:8200
+
+kubectl exec -n vault -ti hashicorp-vault-2 -- vault operator raft join http://hashicorp-vault-0.vault-internal:8200
+
+# unseal #1
+kubectl exec -n vault hashicorp-vault-1 -- vault operator unseal $VAULT_UNSEAL_KEY
+
+# unseal #2
+kubectl exec -n vault hashicorp-vault-2 -- vault operator unseal $VAULT_UNSEAL_KEY
+
+
+# need to configure akv so that vault can auto-unseal..
+```
 
 ## Start/stop cluster to keep costs down
-* 
-    ```bash
-    source secret/env
+```bash
+source secret/env
 
-    az aks start -n $CLUSTER_NAME -g $RG_NAME
+az aks start -n $CLUSTER_NAME -g $RG_NAME
 
-    az aks stop -n $CLUSTER_NAME -g $RG_NAME
-    ```
-
-
-
-2. Install External-DNS
-    ```bash
-    # https://github.com/kubernetes-sigs/external-dns/blob/master/docs/tutorials/azure.md
-    # https://github.com/kubernetes-sigs/external-dns/blob/master/docs/tutorials/istio.md
-    cat <<-EOF > ./secret/azure.json
-    {
-    "tenantId": "${ARM_TENANT_ID}",
-    "subscriptionId": "${ARM_SUBSCRIPTION_ID}",
-    "resourceGroup": "rg-aks-cluster-001",
-    "aadClientId": "${ARM_CLIENT_ID}",
-    "aadClientSecret": "${ARM_CLIENT_SECRET}"
-    }
-    EOF
-
-    # note the azure RG name that contains the dns one is located in some of these files
-    kubectl create ns external-dns
-
-    kubectl create secret generic azure-config-file --namespace external-dns --from-file ./secret/azure.json
-
-    kubectl apply -k ./k8s/apps-manifests/external-dns
-    ```
-2. Install cluster-apps
-    * Installs everything else and will manage argocd itself as well
-    * Configure k8s secret for cert manager, see below
-        ```bash
-        # namespace would normally be created by argocd
-        kubectl create ns cert-manager
-
-        # the secret should normally be stored in vault and created by argocd
-        kubectl create secret generic azuredns-config \
-            -n cert-manager \
-            --from-literal=client-secret=$ARM_CLIENT_SECRET
-        ```
-    * `kubectl apply -k ./k8s/cluster-apps`
-3. Monitoring bootstrap and troubleshooting
-    * Can't access UI thru istio yet!
-    ```bash
-    # get the initial password for "admin" in argocd
-    kubectl get secret argocd-initial-admin-secret \
-        -n argocd \
-        -o jsonpath="{.data.password}" | base64 -d; echo
-
-    # port forward to access the argocd ui at http://localhost:8080/argocd/
-    kubectl port-forward svc/argocd-server \
-        -n argocd 8080:443
-    ```
-
+az aks stop -n $CLUSTER_NAME -g $RG_NAME
+```
 
 ## Get the Istio gateway info
 ```bash
