@@ -5,7 +5,6 @@ namespace: argocd
 
 resources:
 - namespace.yaml
-# - rollouts-extension.yaml
 - https://raw.githubusercontent.com/argoproj/argo-cd/v2.4.3/manifests/ha/install.yaml
 - applications.yaml
 - certificate.yaml
@@ -14,7 +13,6 @@ resources:
 - virtualservice.yaml
 
 components:
-# extensions controller component
 - https://github.com/argoproj-labs/argocd-extensions/manifests
 
 patchesJson6902:

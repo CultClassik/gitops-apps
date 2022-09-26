@@ -1,0 +1,40 @@
+# This will create an Istio ingress gateway and virtual service for argocd-server.
+# This assumes that ArgoCD is running with options `--insecure --rootpath /argocd`
+# This should be replaced by a gateway running TLS on port 443.
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  namespace: vault
+  name: vault
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "vault.aksnp.diehlabs.com"
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  namespace: vault
+  name: vault
+spec:
+  hosts:
+  - "vault.aksnp.diehlabs.com"
+  gateways:
+  - vault
+  http:
+  - match:
+    - uri:
+        prefix: /
+    # rewrite:
+    #   uri: /ui
+    route:
+    - destination:
+        port:
+          number: 8200
+        host: vault-ui

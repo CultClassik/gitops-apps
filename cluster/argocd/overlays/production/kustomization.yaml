@@ -14,7 +14,6 @@ patchesStrategicMerge:
 - certificate.yaml
 - gateway.yaml
 # - issuer.yaml
-# - rollouts-extension.yaml
 - virtualservice.yaml
 
 patchesJson6902:

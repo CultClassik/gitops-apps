@@ -12,3 +12,4 @@ resources:
 # these will create their own istio gateways
 - argo-cd.yaml
 - kiali.yaml
+- vault.yaml
