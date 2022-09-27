@@ -11,5 +11,6 @@ resources:
 - cert-manager.yaml
 # these will create their own istio gateways
 - argo-cd.yaml
-- kiali.yaml
+- kiali-operator.yaml
+- kiali-server.yaml
 - vault.yaml

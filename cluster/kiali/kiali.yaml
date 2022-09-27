@@ -1,0 +1,86 @@
+apiVersion: kiali.io/v1alpha1
+kind: Kiali
+metadata:
+  name: kiali
+  namespace: istio-system
+spec:
+  auth:
+    strategy: "anonymous"
+  deployment:
+    accessible_namespaces: ["**"]
+    view_only_mode: false
+  server:
+    web_root: "/kiali"
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: kiali-ingress-cert
+  namespace: istio-system
+spec:
+  secretName: kiali-ingress-cert
+  commonName: kiali.aksnp.diehlabs.com
+  dnsNames:
+  - kiali.aksnp.diehlabs.com
+  duration: 2160h0m0s # 90d
+  renewBefore: 360h0m0s # 15d
+  subject:
+    organizations:
+      - Diehlabs
+  privateKey:
+    rotationPolicy: Always
+    algorithm: RSA
+    encoding: PKCS1
+    size: 2048
+  usages:
+    - any
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: kiali-ingress-gateway
+  namespace: istio-system
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: kiali-ingress-cert # This should match the Certificate secretName
+    hosts:
+    - "kiali.${INGRESS_DOMAIN}"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: kiali-https
+  namespace: istio-system
+spec:
+  hosts:
+  - "kiali.${INGRESS_DOMAIN}"
+  gateways:
+  - kiali-ingress-gateway
+  http:
+  - route:
+    - destination:
+        port:
+          number: 20001
+        host: istio-system/kiali
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: kiali
+  namespace: istio-system
+spec:
+  host: kiali
+  trafficPolicy:
+    tls:
+      mode: DISABLE
