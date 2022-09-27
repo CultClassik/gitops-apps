@@ -6,12 +6,3 @@ metadata:
 spec:
   source:
     targetRevision: '1.56.1'
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: kiali-config
-  namespace: argocd
-spec:
-  source:
-    targetRevision: HEAD

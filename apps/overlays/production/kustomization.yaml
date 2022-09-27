@@ -13,5 +13,6 @@ patchesStrategicMerge:
 - cert-manager.yaml
 - external-dns.yaml
 - istio.yaml
-- kiali.yaml
+- kiali-operator.yaml
+- kiali-server.yaml
 # - vault.yaml
