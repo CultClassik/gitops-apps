@@ -9,8 +9,8 @@ spec:
   deployment:
     accessible_namespaces: ["**"]
     view_only_mode: false
-  server:
-    web_root: "/kiali"
+  # server:
+  #   web_root: "/kiali"
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
