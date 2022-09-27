@@ -40,13 +40,13 @@ kubectl get secret argocd-initial-admin-secret \
 kubectl get pods -n vault
 
 # initialize
-kubectl exec hashicorp-vault-0 -- vault operator init \
+kubectl exec hashicorp-vault-0 -n vault -- vault operator init \
     -key-shares=5 \
     -key-threshold=3 \
     -format=json > cluster-keys.json
 
 # get the keys
-VAULT_UNSEAL_KEY=$(jq -r ".keys_base64[0]" cluster-keys.json)
+VAULT_UNSEAL_KEY=$(jq -r ".unseal_keys_b64[0]" cluster-keys.json)
 
 # unseal #0
 kubectl exec -n vault hashicorp-vault-0 -- vault operator unseal $VAULT_UNSEAL_KEY

@@ -9,5 +9,8 @@ spec:
       number: 443
       name: https
       protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: argocd-ingress-cert # This should match the Certificate secretName
     hosts:
     - argo.aksnp.diehlabs.com # This should match a DNS name in the Certificate
