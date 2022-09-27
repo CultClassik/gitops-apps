@@ -8,7 +8,7 @@ spec:
     strategy: "anonymous"
   deployment:
     accessible_namespaces: ["**"]
-    view_only_mode: false
+    # view_only_mode: false
   # server:
   #   web_root: "/kiali"
 ---
