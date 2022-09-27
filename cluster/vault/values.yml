@@ -4,6 +4,12 @@ server:
     enabled: true
     raft: 
       enabled: true
+      config: |
+        seal "azurekeyvault" {
+          key_name       = "kv-aks-pGmVhoq4"
+          tenant_id      = "ea7c73d0-fb18-4161-8331-8341717ba99c"
+          vault_name     = "k8sauto-keyvault"
+        }
 
 ui:
   enabled: true
