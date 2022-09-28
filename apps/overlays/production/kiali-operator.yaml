@@ -5,4 +5,6 @@ metadata:
   namespace: argocd
 spec:
   source:
-    targetRevision: '1.56.1'
+    targetRevision: '1.54.0'
+# check istio-kiali version compatibility
+# https://kiali.io/docs/installation/installation-guide/prerequisites/
