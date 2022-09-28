@@ -9,7 +9,8 @@ spec:
   deployment:
     accessible_namespaces: ["**"]
     # view_only_mode: false
-  # server:
+  server:
+    web_fqdn: kiali.aksnp.diehlabs.com
   #   web_root: "/kiali"
 ---
 apiVersion: cert-manager.io/v1
