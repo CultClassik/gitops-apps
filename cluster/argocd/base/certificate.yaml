@@ -17,5 +17,8 @@ spec:
   usages:
     - any
   issuerRef:
-    name: argo-issuer
-    kind: Issuer
+    name: letsencrypt
+    kind: ClusterIssuer
+  # issuerRef:
+  #   name: argo-issuer
+  #   kind: Issuer

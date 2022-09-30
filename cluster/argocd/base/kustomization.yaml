@@ -9,7 +9,7 @@ resources:
 - applications.yaml
 - certificate.yaml
 - gateway.yaml
-- issuer.yaml
+# - issuer.yaml
 - virtualservice.yaml
 
 components:

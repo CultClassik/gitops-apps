@@ -16,13 +16,13 @@ patchesStrategicMerge:
 # - issuer.yaml
 - virtualservice.yaml
 
-patchesJson6902:
-- path: issuer-patch.yaml
-  target:
-    group: cert-manager.io
-    kind: Issuer
-    name: argo-issuer
-    version: v1
+# patchesJson6902:
+# - path: issuer-patch.yaml
+#   target:
+#     group: cert-manager.io
+#     kind: Issuer
+#     name: argo-issuer
+#     version: v1
 
 # images:
 # - name: quay.io/argoproj/argocd

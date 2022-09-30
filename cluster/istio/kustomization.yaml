@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
 - base/namespace.yaml
 - base/istio-1.15.0.yaml
+- base/gateway.yaml
