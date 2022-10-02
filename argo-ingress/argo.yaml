@@ -1,0 +1,64 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: argocd-ingress-cert
+  namespace: argocd
+spec:
+  commonName: argo.aksnp.diehlabs.com
+  dnsNames:
+  - argo.aksnp.diehlabs.com
+  duration: 2160h0m0s
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    rotationPolicy: Always
+    size: 2048
+  renewBefore: 360h0m0s
+  secretName: argocd-ingress-cert
+  subject:
+    organizations:
+    - Diehlabs
+  usages:
+  - any
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: argocd-ingress-gateway
+  namespace: argocd
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      name: https
+      number: 443
+      protocol: HTTPS
+    tls:
+      credentialName: argocd-ingress-cert
+      mode: SIMPLE
+    hosts:
+    - argo.aksnp.diehlabs.com
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: argo-cd-https
+  namespace: argocd
+spec:
+  gateways:
+  - argocd-ingress-gateway
+  hosts:
+  - argo.aksnp.diehlabs.com
+  http:
+  - match:
+    - uri:
+        prefix: /argocd
+    route:
+    - destination:
+        host: argocd-server
+        port:
+          number: 80
