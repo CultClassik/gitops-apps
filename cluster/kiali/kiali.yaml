@@ -67,7 +67,7 @@ spec:
   hosts:
   - kiali.aksnp.diehlabs.com
   gateways:
-  - kiali-ingress-gateway
+  - ingress-gateway
   http:
   - route:
     - destination:
