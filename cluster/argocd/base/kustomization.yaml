@@ -8,7 +8,7 @@ resources:
 - https://raw.githubusercontent.com/argoproj/argo-cd/v2.4.3/manifests/ha/install.yaml
 - applications.yaml
 - certificate.yaml
-- gateway.yaml
+# - gateway.yaml
 # - issuer.yaml
 - virtualservice.yaml
 

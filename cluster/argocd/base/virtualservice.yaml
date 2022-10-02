@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
 spec:
   gateways:
-  - argocd-ingress-gateway
+  - istio-system/argocd-ingress-gateway
   http:
   - match:
     - uri:

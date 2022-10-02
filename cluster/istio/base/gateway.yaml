@@ -6,7 +6,6 @@ metadata:
 spec:
   selector:
     istio: ingressgateway
-spec:
   servers:
   - port:
       number: 443
@@ -14,6 +13,15 @@ spec:
       protocol: HTTPS
     tls:
       mode: SIMPLE
-      credentialName: argocd-ingress-cert # This should match the Certificate secretName
+      credentialName: argocd/argocd-ingress-cert # This should match the Certificate secretName
     hosts:
     - argo.aksnp.diehlabs.com # This should match a DNS name in the Certificate
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: kiali-ingress-cert # This should match the Certificate secretName
+    hosts:
+    - kiali.aksnp.diehlabs.com # This should match a DNS name in the Certificate

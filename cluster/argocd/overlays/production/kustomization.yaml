@@ -12,7 +12,7 @@ resources:
 patchesStrategicMerge:
 - applications.yaml
 - certificate.yaml
-- gateway.yaml
+# - gateway.yaml
 # - issuer.yaml
 - virtualservice.yaml
 
