@@ -15,4 +15,5 @@ patchesStrategicMerge:
 - istio.yaml
 - kiali-operator.yaml
 - kiali-server.yaml
+- kured.yaml
 # - vault.yaml
